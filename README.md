@@ -1,21 +1,95 @@
-Cucumber BDD framework with web driver manager & Allure Reporting along with Page Object Model- using Selenium 4 in a Maven-Java Project
+## Selenium Cucumber Project Using Maven & TestNG
+This repository contains a Selenium automation framework that leverages Cucumber for Behavior-Driven Development (BDD), Maven for dependency management, and TestNG as the testing framework. It is designed for easy configuration and scalability.
 
-There are 3 testcases which we want to automate:
-1. LoggedIn User View:
-When a user has a valid login details and he tries to navigate after he has successfully logged in
+# Table of Contents
+Prerequisites
+Folder Structure
+Installation
+Running Tests
+Reporting
+Contributing
+License
 
-2. New Registration View:
-When a user is not a valid login and wants to register himself and navigates to Registration Page
+# Prerequisites
+Before running the project, ensure you have the following installed on your system:  
 
-3. General User View:
-When a user doesnot a login page neither he wants to register himself but he wants to navigate and have a look at the Online Products page
+Java JDK 8+  
+Maven 3.x  
+An IDE such as IntelliJ IDEA or Eclipse  
+Chrome Browser (or any browser of your choice; adjust the WebDriver accordingly)  
+TestNG Plugin (if your IDE doesn’t already include it)  
+Folder Structure  
+# Below is an example of the project folder structure:
+```
+selenium-cucumber-project/
+├── pom.xml
+├── README.md
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── helper
+    │   │       └── DriverManager.java      // Manages the WebDriver instance
+    │   └── resources
+    │       └── config.properties            // Configuration files (if any)
+    └── test
+        ├── java
+        │   ├── hooks
+        │   │   └── Hooks.java               // Cucumber hooks for before/after scenarios
+        │   ├── pages
+        │   │   └── LoginPage.java           // Page Object Model for Login page
+        │   ├── stepDefinitions
+        │   │   └── LoginSteps.java          // Step definitions for Cucumber scenarios
+        │   └── runners
+        │       └── TestRunner.java          // TestNG runner to trigger Cucumber tests
+        └── resources
+            ├── features
+            │   └── Login.feature            // Cucumber feature file(s)
+            └── testng.xml                   // TestNG configuration file
 
-Features
-1. LoggedIn.feature
-Scenario: Validate user is able to view after Login Given User navigates to the Login page When User successfully enters the log in details Then User should be able to view the product category page
+```
 
-2. NewUserRegistration.feature
-Scenario: Validate new user is able to view after clicking on new Registration Given User navigates to the Login page When User clicks on new Registration button Then User should be able to view the Registration page
+# Folder Structure Details
 
-3. GeneralUserView.feature
-Scenario: Validate general user is able to view products wihtout logging in Given User navigates to the Online products page When User clicks on Formal Shoes drop down Then User should be able to view the Products
+- pom.xml: Maven configuration file that handles dependencies and build settings.
+- src/main/java: Contains production code, such as helper classes (e.g., DriverManager.java).
+- src/test/java: Holds test code including:
+  - hooks: Contains Cucumber hooks (Hooks.java) that run before and after scenarios (e.g., for screenshots and video recording).
+  - pages: Implements Page Object Model (POM) classes such as LoginPage.java.
+  - stepDefinitions: Contains step definitions that map Gherkin steps to Java code.
+  - runners: Holds the TestNG runner class (TestRunner.java) to run Cucumber tests.
+  - src/test/resources: Contains test resources like:
+  - features: Cucumber feature files written in Gherkin.
+  - testng.xml: TestNG suite configuration.
+```
+Installation
+Clone the Repository:
+git clone https://github.com/yourusername/selenium-cucumber-project.git
+cd selenium-cucumber-project
+Install Dependencies: Maven will automatically download the necessary dependencies when you build the project.
+
+mvn clean install
+Running Tests
+Using Maven
+You can run your TestNG suite with Maven using the following command:
+
+mvn clean test
+Using TestNG XML
+Alternatively, you can run tests by executing the testng.xml file from your IDE or via Maven Surefire Plugin configured in pom.xml.
+
+Using an IDE
+Open the project in your IDE.
+Locate the TestRunner.java in the runners package.
+Right-click and choose Run 'TestRunner'.
+Reporting
+This project integrates with reporting tools such as Allure to generate detailed test reports. After test execution, you can generate and view the Allure report:
+
+Generate the Allure Report:
+allure serve target/allure-results
+Video and Screenshot Attachments: The Cucumber hooks capture screenshots and video recordings on test failures. These are attached to the report for easier debugging.
+Contributing
+Contributions are welcome! Please follow these steps:
+
+Fork the repository.
+Create a new branch for your feature or bug fix.
+Commit your changes and push the branch.
+Open a pull request with a clear description of your changes.
